@@ -1,0 +1,21 @@
+
+[versions]
+# Sugestão de versões estáveis
+agp = "8.3.2"
+kotlin = "1.9.23"
+coreKtx = "1.12.0" # Uma versão mais comum
+hilt = "2.48.1"  # <--- Downgrade importante
+hiltNavigationFragment = "1.0.0" # <--- Downgrade importante
+# ... outras versões
+
+[libraries]
+# ...
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-hilt-navigation-fragment = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+# ...
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

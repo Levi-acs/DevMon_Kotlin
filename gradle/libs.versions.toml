@@ -12,6 +12,8 @@ hilt = "2.52"
 lifecycle = "2.8.7"
 navigation = "2.8.7"
 ksp = "2.0.21-1.0.28"  # ADICIONE ESTA LINHA
+glide = "4.16.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,10 +46,14 @@ androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-
 # Hilt + Navigation
 androidx-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", version = "1.2.0" }
 
+glide = { module = "com.github.bumptech.glide:glide", version = "4.16.0" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version = "4.16.0" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }  # ADICIONE ESTA LINHA
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }

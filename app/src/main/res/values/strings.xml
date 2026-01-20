@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
 
-    <string name="creature_number"># %1$03d</string>
+    <string name="string_number"># %1$03d</string>
+
+    <string name="monsters_egg">Monsters egg</string>
+
+    <string name="youve_got_an_egg">You ve got an egg</string>
+
+    <string name="click_to_hatch_it">Click to hatch it!</string>
 </resources>

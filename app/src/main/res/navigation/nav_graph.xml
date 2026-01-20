@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/creaturesListFragment">
-
     <fragment
         android:id="@+id/creaturesListFragment"
-        android:name="com.example.myapplication.view.CreaturesListFragment"
-        android:label="CreaturesListFragment" />
+        android:name="com.example.myapplication.view.creatures.CreaturesListFragment"
+        android:label="creatures_list_fragment"
+        tools:layout="@layout/creatures_list_fragment" >
+        <action
+            android:id="@+id/action_creaturesListFragment_to_creatureChooseFragment"
+            app:destination="@id/creatureChooseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creatureChooseFragment"
+        android:name="com.example.myapplication.view.creatures.CreatureChooseFragment"
+        android:label="CreatureChooseFragment" />
 </navigation>

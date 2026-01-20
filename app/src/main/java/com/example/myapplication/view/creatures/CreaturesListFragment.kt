@@ -1,4 +1,4 @@
-package com.example.myapplication.view
+package com.example.myapplication.view.creatures
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +12,11 @@ import com.example.myapplication.R
 import com.example.myapplication.viewmodel.CreaturesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class CreaturesListFragment : Fragment() {
     private val creaturesViewModel: CreaturesViewModel by viewModels()
+    private lateinit var adapter: CreaturesListAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,13 +26,17 @@ class CreaturesListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
-        recyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        adapter = CreaturesListAdapter(mutableListOf())
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+        recyclerView.setHasFixedSize(true)
 
         creaturesViewModel.creatures.observe(viewLifecycleOwner) {
-            recyclerView.adapter = CreaturesListAdapter(it)
+            adapter.updateList(it)
         }
     }
 }

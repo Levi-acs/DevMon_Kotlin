@@ -8,9 +8,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CreaturesViewModel @Inject constructor(creatureRepository: CreatureRepository) : ViewModel() {
+class ChooseViewModel @Inject constructor(creatureRepository: CreatureRepository) : ViewModel() {
 
-    val creatures = MutableLiveData<List<Creature>>()
+        val creatures = MutableLiveData<List<Creature>>()
 
     init {
         creatures.value = creatureRepository.creatures

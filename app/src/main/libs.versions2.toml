@@ -1,0 +1,5 @@
+toml
+[versions]
+# ... outras versões
+hilt = "2.51.1"  // MODIFIQUE esta linha de 2.52 para 2.51.1
+# ... outras versões

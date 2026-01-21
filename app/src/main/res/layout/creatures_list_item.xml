@@ -85,7 +85,6 @@
                 android:scaleType="centerInside"
                 android:contentDescription="@string/app_name"
                 tools:src="@drawable/creature_java"
-                app:imageUrl="@{creature.imageUrl}"
                 app:layout_constraintTop_toBottomOf="@id/barrier3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

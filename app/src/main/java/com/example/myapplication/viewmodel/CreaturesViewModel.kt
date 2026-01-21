@@ -15,4 +15,5 @@ class CreaturesViewModel @Inject constructor(creatureRepository: CreatureReposit
     init {
         creatures.value = creatureRepository.creatures
     }
+
 }

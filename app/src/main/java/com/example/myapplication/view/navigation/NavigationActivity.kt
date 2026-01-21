@@ -5,15 +5,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.example.myapplication.R
-import com.example.myapplication.viewmodel.NavigationViewModel
+import com.example.myapplication.R.id.creature_choose_dest
+import com.example.myapplication.view.creatures.CreaturesListFragmentDirections
 import com.example.myapplication.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NavigationActivity : AppCompatActivity() {
-    private val navigationViewModel: NavigationViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
-
 
     private val navController by lazy {
         val navHostFragment =
@@ -28,20 +27,24 @@ class NavigationActivity : AppCompatActivity() {
 
         initNavigation()
 
+        userViewModel.onChooseCreature.observe(this) {
+
+        }
+
     }
 
     private fun initNavigation() {
+// Add NavGraph
         val graphInflater = navController.navInflater
         val navGraph = graphInflater.inflate(R.navigation.nav_graph)
         navController.graph = navGraph
-
         if (userViewModel.user.hasCreatureAvailable
             && navController.currentDestination?.id !=
             R.id.creature_choose_dest
         ) {
-            val action = CreaturesListFragmentDirection.creatureChooseAction()
+            val action =
+                CreaturesListFragmentDirections.creatureChooseAction()
             navController.navigate(action)
         }
-
     }
 }

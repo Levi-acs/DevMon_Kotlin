@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.example.myapplication.R
-import com.example.myapplication.R.id.creature_choose_dest
+import com.example.myapplication.view.creatures.CreatureChooseFragmentDirections
 import com.example.myapplication.view.creatures.CreaturesListFragmentDirections
 import com.example.myapplication.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,10 +28,14 @@ class NavigationActivity : AppCompatActivity() {
         initNavigation()
 
         userViewModel.onChooseCreature.observe(this) {
-
+            if (navController.currentDestination?.id == R.id.creature_choose_dest) {
+                val action =
+                    CreatureChooseFragmentDirections.creatureChooseToCreatureAddedAction(it.number)
+                navController.navigate(action)
+            }
         }
-
     }
+
 
     private fun initNavigation() {
 // Add NavGraph

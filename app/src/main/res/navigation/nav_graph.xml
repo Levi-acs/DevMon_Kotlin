@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/creatures_list_dest">
+
     <fragment
         android:id="@+id/creatures_list_dest"
         android:name="com.example.myapplication.view.creatures.CreaturesListFragment"
@@ -13,9 +14,27 @@
             android:id="@+id/creature_choose_action"
             app:destination="@id/creature_choose_dest" />
     </fragment>
+
     <fragment
         android:id="@+id/creature_choose_dest"
         android:name="com.example.myapplication.view.creatures.CreatureChooseFragment"
         android:label="creature_choose_fragment"
-        tools:layout="@layout/creature_choose_fragment" />
+        tools:layout="@layout/creature_choose_fragment">
+
+        <action
+            android:id="@+id/creature_choose_to_creature_added_action"
+            app:destination="@id/creature_added_dest"
+            app:popUpTo="@id/creatures_list_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/creature_added_dest"
+        android:name="com.example.myapplication.view.creatures.CreatureAddedFragment"
+        android:label="CreaturesAddedFragment"
+        tools:layout="@layout/creature_added_fragment">
+
+        <argument
+            android:name="creatureNumber"
+            app:argType="integer" />
+    </fragment>
 </navigation>

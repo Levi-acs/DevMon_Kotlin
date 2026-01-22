@@ -57,6 +57,7 @@
             android:layout_height="340dp"
             android:layout_marginTop="20dp"
             android:contentDescription="@string/creatures_image"
+            app:imageUrl="@{creature.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +65,7 @@
             tools:src="@drawable/creature_java" />
 
         <Button
-            android:id="@+id/btAddCreature"
+            android:id="@+id/btAdCreature"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

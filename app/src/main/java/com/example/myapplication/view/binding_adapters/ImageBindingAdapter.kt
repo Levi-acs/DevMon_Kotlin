@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.example.myapplication.view.binding_adapters
 
 import android.widget.ImageView

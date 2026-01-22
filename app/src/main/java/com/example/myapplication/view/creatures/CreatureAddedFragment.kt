@@ -9,28 +9,28 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.R
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.navigation.fragment.navArgs
 import com.example.myapplication.databinding.CreatureAddedFragmentBinding
 import com.example.myapplication.viewmodel.CreaturesViewModel
 
 @AndroidEntryPoint
 class CreatureAddedFragment : Fragment() {
-    private lateinit var binding : CreatureAddedFragmentBinding
+    private lateinit var binding: CreatureAddedFragmentBinding
 
     private val viewModel: CreaturesViewModel by viewModels()
 
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) : View {
-        binding = CreatureAddedFragmentBinding.inflate(
-            layoutInflater,
-            container,
-            false
-        )
+    ): View {
+        binding =
+            CreatureAddedFragmentBinding.inflate(
+                layoutInflater,
+                container,
+                false
+            )
+
         return binding.root
     }
 
@@ -38,12 +38,16 @@ class CreatureAddedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val safeArgs: CreatureAddedFragmentArgs by navArgs()
-        val creatureNumber = safeArgs.creatureNumber
+        val creatureId = safeArgs.creatureNumber
 
-        //metodo find creature
-        val creature = viewModel.findCreature(creatureNumber)
+        // Find Creature
+        val creature = viewModel.findCreature(creatureId)
         binding.creature = creature
 
+         // adicionando criaturas a lista
+        val btAddCreature = view.findViewById<Button>(R.id.btAdCreature)
+        btAddCreature.setOnClickListener {
+                findNavController().popBackStack()
+        }
     }
-
 }

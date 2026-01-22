@@ -11,11 +11,20 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(private val creatureRepository: CreatureRepository) {
     val user = User("Paulo Salvatore", true)
 
-        private val _onChooseCreature = MutableLiveData<Creature>()
-        val onChooseCreature : LiveData<Creature>
+    val allCreatures get() = creatureRepository.creatures.map {
+        val isKnown = user.creatures.any{
+            creatureOwnByUser -> creatureOwnByUser.number == it.number
+
+        }
+        it.copy(
+            name = if (isKnown) it.name else "????",
+            isKnown = isKnown
+        )
+    }
+
+    private val _onChooseCreature = MutableLiveData<Creature>()
+    val onChooseCreature: LiveData<Creature>
         get() = _onChooseCreature
-
-
 
 
     fun chooseCreature() {

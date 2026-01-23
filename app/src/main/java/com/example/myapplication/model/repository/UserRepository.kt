@@ -8,14 +8,17 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserRepository @Inject constructor(private val creatureRepository: CreatureRepository) {
+class UserRepository @Inject constructor(private val creaturesRepository: CreaturesRepository) {
     val user = User("Paulo Salvatore", true)
 
-    val allCreatures get() = creatureRepository.creatures.map {
+    val allCreatures get() = creaturesRepository.creatures.map {
         val isKnown = user.creatures.any{
             creatureOwnByUser -> creatureOwnByUser.number == it.number
 
         }
+        android.util.Log.d("UserRepo", "Creature ${it.number}: isKnown = $isKnown")
+        android.util.Log.d("UserRepo", "User has ${user.creatures.size} creatures: ${user.creatures.map { c -> c.number }}")
+
         it.copy(
             name = if (isKnown) it.name else "????",
             isKnown = isKnown
@@ -33,7 +36,7 @@ class UserRepository @Inject constructor(private val creatureRepository: Creatur
         }
 
         user.hasCreatureAvailable = false
-        val randoCreature = creatureRepository.creatures.random()
+        val randoCreature = creaturesRepository.creatures.random()
         user.creatures.add(randoCreature)
 
         _onChooseCreature.value = randoCreature

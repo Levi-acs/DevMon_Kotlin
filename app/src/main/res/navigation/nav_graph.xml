@@ -13,6 +13,10 @@
         <action
             android:id="@+id/creature_choose_action"
             app:destination="@id/creature_choose_dest" />
+
+        <action
+            android:id="@+id/creature_view_action"
+            app:destination="@id/creature_view_dest" />
     </fragment>
 
     <fragment
@@ -32,6 +36,17 @@
         android:name="com.example.myapplication.view.creatures.CreatureAddedFragment"
         android:label="CreaturesAddedFragment"
         tools:layout="@layout/creature_added_fragment">
+
+        <argument
+            android:name="creatureNumber"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/creature_view_dest"
+        android:name="com.example.myapplication.view.creatures.CreatureViewFragment"
+        android:label="CreatureViewFragment"
+        tools:layout="@layout/creature_view_fragment">
 
         <argument
             android:name="creatureNumber"

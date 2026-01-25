@@ -12,13 +12,14 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.myapplication.databinding.CreatureAddedFragmentBinding
+import com.example.myapplication.viewmodel.CreatureViewModel
 import com.example.myapplication.viewmodel.CreaturesViewModel
 
 @AndroidEntryPoint
 class CreatureAddedFragment : Fragment() {
     private lateinit var binding: CreatureAddedFragmentBinding
+    private val viewModel: CreatureViewModel by viewModels()
 
-    private val viewModel: CreaturesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,12 +38,14 @@ class CreatureAddedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //set viewModel
+        binding.viewModel = viewModel
+
         val safeArgs: CreatureAddedFragmentArgs by navArgs()
         val creatureId = safeArgs.creatureNumber
+        viewModel.loadCreature(creatureId)
 
-        // Find Creature
-        val creature = viewModel.findCreature(creatureId)
-        binding.creature = creature
+
 
          // adicionando criaturas a lista
         val btAddCreature = view.findViewById<Button>(R.id.btAdCreature)

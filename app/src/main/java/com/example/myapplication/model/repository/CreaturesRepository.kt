@@ -1,12 +1,13 @@
 package com.example.myapplication.model.repository
 
 import com.example.myapplication.model.domain.Creature
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class CreaturesRepository @Inject constructor() {
-    val creatures: List<Creature>
+    val creatures: Observable<List<Creature>>
 
     init {
         val creature1 = Creature(
@@ -34,17 +35,15 @@ class CreaturesRepository @Inject constructor() {
             "https://i.imgur.com/rNKVxSt.png"
         )
 
-        creatures = listOf(
-            creature1,
-            creature2,
-            creature3,
-            creature4,
-            creature5,
-            creature6
+        creatures = Observable.just(
+            listOf()
         )
+
     }
 
-    fun findCreature(number: Int) = creatures.find { it.number == number }
+    fun findCreature(number: Int): Observable<Creature> = creatures.map { list ->
+        list.find { it.number == number}!!
+    }
 }
 
 

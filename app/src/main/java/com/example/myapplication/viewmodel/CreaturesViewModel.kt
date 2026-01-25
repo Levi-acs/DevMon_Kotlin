@@ -2,22 +2,30 @@ package com.example.myapplication.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.extensions.rx.CompositeDisposableExtensions.plusAssign
+import com.example.myapplication.model.domain.Creature
 import com.example.myapplication.model.repository.CreaturesRepository
 import com.example.myapplication.model.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @HiltViewModel
 class CreaturesViewModel @Inject constructor(private val creaturesRepository: CreaturesRepository,
-                                           private val  userRepository : UserRepository) : ViewModel() {
+                                           private val  userRepository : UserRepository,) : ViewModel() {
 
-    val creatures = MutableLiveData(userRepository.allCreatures)
+    val creatures = MutableLiveData<List<Creature>>()
 
-    fun findCreature(number: Int) = creaturesRepository.findCreature(number)
+    private val composite = CompositeDisposable()
 
-    fun refreshCreatures() {
-        creatures.value = userRepository.allCreatures
+    init {
+      composite += userRepository.allCreatures.subscribe {
+            creatures.value = it
+        }
+    }
 
+    override fun onCleared() {
+        composite.dispose()
     }
 
 

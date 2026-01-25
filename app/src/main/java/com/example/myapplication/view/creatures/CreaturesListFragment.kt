@@ -50,9 +50,5 @@ class CreaturesListFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Força atualizar os dados quando o fragment volta a ficar visível
-        creaturesViewModel.refreshCreatures()
-    }
+
 }

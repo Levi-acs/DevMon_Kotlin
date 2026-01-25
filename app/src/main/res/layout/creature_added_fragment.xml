@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="creature"
-            type="com.example.myapplication.model.domain.Creature" />
+            name="viewModel"
+            type="com.example.myapplication.viewmodel.CreatureViewModel" />
 
     </data>
 
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent">
             <TextView
                 android:id="@+id/tvTitle"
-                android:text="@{@string/creature_hatched(creature.name)}"
+                android:text="@{@string/creature_hatched(viewModel.creature.name)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -57,7 +57,7 @@
             android:layout_height="340dp"
             android:layout_marginTop="20dp"
             android:contentDescription="@string/creatures_image"
-            app:imageUrl="@{creature.imageUrl}"
+            app:imageUrl="@{viewModel.creature.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

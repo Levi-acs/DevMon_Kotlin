@@ -30,7 +30,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/saira_400"
-                android:text='@{String.format(@string/string_number, creature.number)}'
+                android:text='@{String.format(@string/creature_number(creature.number))}'
                 tools:text="# 001"
                 android:textColor="#5D414F"
                 app:layout_constraintStart_toStartOf="parent"

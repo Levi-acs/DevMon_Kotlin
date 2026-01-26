@@ -51,4 +51,8 @@ class CreaturesListFragment : Fragment() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        creaturesViewModel.refreshCreatures() // CHAMA REFRESH QUANDO VOLTA PARA TELA
+    }
 }

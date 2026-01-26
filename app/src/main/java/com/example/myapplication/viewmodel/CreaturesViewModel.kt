@@ -8,9 +8,9 @@ import com.example.myapplication.model.domain.Creature
 import com.example.myapplication.model.repository.CreaturesRepository
 import com.example.myapplication.model.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers // ADICIONE
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers // ADICIONE
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,18 +24,28 @@ class CreaturesViewModel @Inject constructor(
     private val composite = CompositeDisposable()
 
     init {
+        loadCreatures() // MUDE PARA CHAMAR FUNÇÃO SEPARADA
+    }
 
+    // ADICIONE ESTE MÉTODO
+    private fun loadCreatures() {
         composite += userRepository.allCreatures
-            .subscribeOn(Schedulers.io()) // ADICIONE - Executa em background
-            .observeOn(AndroidSchedulers.mainThread()) // ADICIONE - Atualiza UI na thread principal
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { creatureList -> // onNext
+                { creatureList ->
+                    Log.d("CreaturesViewModel", "Loaded ${creatureList.size} creatures")
                     creatures.value = creatureList
                 },
-                { error -> // onError - ADICIONE tratamento de erro
+                { error ->
                     Log.e("CreaturesViewModel", "Error loading creatures", error)
                 }
             )
+    }
+
+    // ADICIONE ESTE MÉTODO PÚBLICO PARA REFRESH
+    fun refreshCreatures() {
+        loadCreatures()
     }
 
     override fun onCleared() {

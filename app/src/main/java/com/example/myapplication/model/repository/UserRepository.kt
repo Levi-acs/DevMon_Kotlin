@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.model.domain.Creature
 import com.example.myapplication.model.domain.User
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -11,6 +12,8 @@ import javax.inject.Singleton
 @Singleton
 class UserRepository @Inject constructor(private val creaturesRepository: CreaturesRepository) {
     val user = User("Paulo Salvatore", true)
+    private val refreshTrigger = BehaviorSubject.createDefault(Unit)
+
 
     val allCreatures: Observable<List<Creature>>
         get() = creaturesRepository.creatures.map { list ->
@@ -29,6 +32,8 @@ class UserRepository @Inject constructor(private val creaturesRepository: Creatu
 
 
     private val _onChooseCreature = MutableLiveData<Creature>()
+
+
     val onChooseCreature: LiveData<Creature>
         get() = _onChooseCreature
 
